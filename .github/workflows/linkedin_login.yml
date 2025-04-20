@@ -1,0 +1,30 @@
+name: LinkedIn Login
+
+on:
+  workflow_dispatch:
+
+jobs:
+  login:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Create .env file from secrets
+        run: |
+          echo "USERNAME=${{ secrets.LINKEDIN_USER }}" >> .env
+          echo "PASSWORD=${{ secrets.LINKEDIN_PASS }}" >> .env
+
+      - name: Run Selenium LinkedIn login script
+        run: |
+          python login_linkedin.py
