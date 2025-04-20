@@ -20,11 +20,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Create .env file from secrets
-        run: |
-          echo "USERNAME=${{ secrets.LINKEDIN_USER }}" >> .env
-          echo "PASSWORD=${{ secrets.LINKEDIN_PASS }}" >> .env
-
       - name: Run Selenium LinkedIn login script
+        env:
+          USERNAME: ${{ secrets.LINKEDIN_USER }}
+          PASSWORD: ${{ secrets.LINKEDIN_PASS }}
         run: |
           python login_linkedin.py
