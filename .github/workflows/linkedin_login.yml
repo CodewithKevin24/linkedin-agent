@@ -10,6 +10,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # Debug step to verify that the secret is being passed
+      - name: Debug: Check USERNAME secret
+        env:
+          USERNAME: ${{ secrets.LINKEDIN_USER }}
+        run: |
+          if [ -z "$USERNAME" ]; then echo "ERROR: LINKEDIN_USER secret is empty" && exit 1; else echo "USERNAME secret found"; fi
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
