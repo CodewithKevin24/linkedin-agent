@@ -10,7 +10,7 @@ from selenium.common.exceptions import NoSuchElementException
 from webdriver_manager.chrome import ChromeDriverManager
 from dotenv import load_dotenv, find_dotenv
 
-# Load .env if present, then override with environment variables
+# Load local .env if present; GitHub Actions will override via environment variables
 load_dotenv(find_dotenv(), override=True)
 
 USERNAME = os.getenv('USERNAME')
@@ -19,7 +19,7 @@ PASSWORD = os.getenv('PASSWORD')
 if not USERNAME or not PASSWORD:
     raise ValueError("USERNAME and PASSWORD must be set in environment variables")
 
-# Configure Chrome for headless execution
+# Configure headless Chrome
 options = Options()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
