@@ -11,8 +11,8 @@ import time
 
 # Load credentials from .env
 load_dotenv()
-USERNAME = kevindaksh18@gmail.com
-PASSWORD = VanuDaksh@06387
+USERNAME = os.getenv('USERNAME')
+PASSWORD = os.getenv('PASSWORD')
 
 if not USERNAME or not PASSWORD:
     raise ValueError("USERNAME and PASSWORD must be set in the .env file")
